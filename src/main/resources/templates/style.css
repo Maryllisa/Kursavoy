@@ -1,0 +1,21 @@
+.bgr_for_home
+{
+    position: absolute;
+    background: url('https://www.wallpaperbetter.com/wallpaper/999/511/740/great-britain-london-england-big-ben-1080P-wallpaper.jpg');
+    backdrop-filter: blur(5px);
+    background-size: 1830px 800px;
+    height: 800px;
+    width: 1700px;
+    margin-top: 0px;
+    margin-left: 0px;
+
+
+}
+.position-relative2
+{
+    padding-top: 150px;
+    padding-left: 75px;
+    backdrop-filter: blur(200px);
+
+    color: #fff;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+  <style>
+    .bgr_for_home
+    {
+      position: absolute;
+      background: url('https://www.wallpaperbetter.com/wallpaper/999/511/740/great-britain-london-england-big-ben-1080P-wallpaper.jpg');
+      backdrop-filter: blur(5px);
+      background-size: 1830px 800px;
+      height: 100%;
+      width: 1700px;
+      margin-top: 0px;
+      margin-left: 0px;
+
+    }
+    table {
+      font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+      text-align: left;
+      border-collapse: separate;
+      border-spacing: 5px;
+      background: #ECE9E0;
+      color: #656665;
+      border: 16px solid #ECE9E0;
+      border-radius: 20px;
+      color: white;
+
+    }
+    th {
+      font-size: 18px;
+      padding: 10px;
+    }
+    td {
+      background: #F5D7BF;
+      padding: 10px;
+    }
+    label{
+      color: whitesmoke;
+    }
+    .fon
+    {
+
+        padding-left: 100px;
+        width: 1200px;
+        height: 300px;
+        background: white;
+        backdrop-filter: blur(10px);
+        opacity: 0.7;
+        border-radius: 20px 20px 20px 20px;
+        margin-bottom:20px ;
+        margin-top: 50px;
+    }
+  </style>
+</head>
+<body class="bgr_for_home">
+<div th:replace="admin/header :: content"/>
+<main>
+  <div class=" container px-4 py-5" id="featured-3">
+    <h2 class=" pb-1 border-bottom">Проверка оплаты</h2>
+    <form th:action="*{'/admin/fee/findFee/'}">
+        <label>
+          Фамилия
+          <input class="form-control" placeholder="First name" type="text" name="surname">
+        </label>
+        <label>
+          Имя
+          <input class="form-control" placeholder="Last name" type="text" name="name">
+        </label>
+        <label>
+          Отчество
+          <input class="form-control" placeholder="Last name" type="text" name="patronymic">
+        </label>
+        <input type="submit" value="поиск оплаты">
+    </form>
+<div th:if="${fees}!=null" th:each="f:${fees}"  >
+    <div  class="fon" th:if="*{f.date.getMonth()==(localDate.getMonthValue()-1)}">
+  <h4 th:text="${'Номер оплаты: '+f.idFee}"/>
+  <h4 th:text="${'ФИО студента: '+f.studentsByIdStudent.surname + ' ' + f.studentsByIdStudent.name + ' ' + f.studentsByIdStudent.patronymic}"/>
+  <h4 th:text="${'Дата оплаты: '+f.date}"/>
+  <a th:if="${'Документ: '+ f.document!=null}" th:target="_blank" th:href="*{'/admin/blog/pdf/' + f.document.id}"><h6 th:text="${f.document.name}" /></a>
+  <h4 th:if="${f.status_fee == false}" th:text="Отказано"/>
+  <h4 th:if="${f.status_fee == true}" th:text="Принято"/>
+  <form class="form-control" th:action="*{'/admin/fee/false/' + f.studentsByIdStudent.idStudents + '/' + f.idFee}">
+    <input type="submit" value="Заблокировать доступ">
+  </form>
+  <form class="form-control" th:action="*{'/admin/fee/true/' + f.studentsByIdStudent.idStudents + '/' + f.idFee}">
+    <input type="submit" value="Продлить подписку">
+  </form>
+    </div>
+</div>
+  </div>
+</main>
+
+</body>
+</html>

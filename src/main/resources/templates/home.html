@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/templates/style.css">
+    <style>
+        .bgr_for_home
+        {
+            position: absolute;
+            background: url('https://www.wallpaperbetter.com/wallpaper/999/511/740/great-britain-london-england-big-ben-1080P-wallpaper.jpg');
+            backdrop-filter: blur(5px);
+            background-size: 1830px 800px;
+            height: 800px;
+            width: 1700px;
+            margin-top: 0px;
+            margin-left: 0px;
+
+
+        }
+        .position-relative2
+        {
+            padding-top: 150px;
+            padding-left: 75px;
+            backdrop-filter: blur(200px);
+
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="bgr_for_home">
+<div th:replace="header :: content"></div>
+<div class="lol">
+    <div class=" position-relative2 text-center bg-body-tertiary" >
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1 ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Школа инЯз</font></font></h1>
+            <p class="lead fw-normal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Small steps, Big results. It is all about us! </font><font style="vertical-align: inherit;">Маленькими шагами мы достигаем больших результатов. Это все МЫ!</font></font></p>
+            <a class="btn btn-outline-secondary" href="/about"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Узнать подробности</font></font></a>
+        </div>
+        <div class="product-device shadow-sm d-none d-md-block"></div>
+        <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+    </div>
+</div>
+</main>
+
+
+<script rel="script" href="D:/Курсовой проект веб/Kursavoy/src/main/resources/templates/script.js"></script>
+<script rel="script" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

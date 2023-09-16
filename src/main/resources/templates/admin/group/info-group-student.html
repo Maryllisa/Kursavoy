@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+  <style>
+    .div1, .div2 {
+      border: 1px solid black;
+      width: 600px;
+      height: 300px;
+      background: darkgray;
+      display: none;
+    }
+    .bgr_for_home
+    {
+      position: absolute;
+      background: url('https://www.wallpaperbetter.com/wallpaper/999/511/740/great-britain-london-england-big-ben-1080P-wallpaper.jpg');
+      /*backdrop-filter: blur(5px);*/
+      background-size: auto;
+      height: 100%;
+      width: 100%;
+      margin-top: 0px;
+      margin-left: 0px;
+
+
+    }
+    #position-relative2
+    {
+      padding-top: 190px;
+      padding-left: -100px;
+    }
+
+  </style>
+</head>
+<body class="bgr_for_home">
+<div th:replace="admin/header :: content"/>
+<div th:replace="admin/group/info-group :: content"/>
+<main>
+ <table>
+   <tr>
+     <td>
+         <div class=" container px-4 py-5" id="featured-3">
+    <h2 class=" pb-1 border-bottom">Группы </h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+      <div style="background: black; width: 600px; border-radius: 10px 10px 10px 10px;" th:each="crs:${cours}" class="feature col">
+        <h3 class="fs-2" style="color: whitesmoke" th:text="${'Курс: '+crs.nameCours + ' Группа: '+ crs.forgingroup.idForginGroup}"/>
+        <p style="color: whitesmoke" th:text="${crs.infoCours}"/>
+        <div style="color: whitesmoke" th:each="i:${crs.forgingroup.students}">
+        <h4 th:text="${i.surname + ' ' + i.name + ' ' + i.patronymic}"/>
+          <form th:action="*{'/admin/group/delete_from_group/' + i.idStudents}" >
+            <button type="submit" class="btn btn-primary" id="deletStudent" name="pop">Исключить</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div></td>
+     <td><div th:each="sts:${studentsWithoutGroup}">
+    <h3 th:text="${sts.surname + ' ' + sts.name + ' ' + sts.patronymic}" />
+    <form th:action="*{'/admin/group/add_new_student/' + sts.idStudents}" method="post">
+        <select  name="group">
+            <option th:each="s:${cours}" th:value="${s.forgingroup.idForginGroup}" th:text="${s.forgingroup.idForginGroup}"/>
+        </select>
+      <input type="submit" class="btn btn-primary" id="addStudent" name="pop" value="Определить в группу"><br>
+    </form>
+  </div></td>
+   </tr>
+ </table>
+</main>
+</body>
+<script>
+    const myButton = document.getElementById("addStudent");
+    myButton.addEventListener("click", function() {
+        alert("Студент добавлен");
+    });
+    const myButton = document.getElementById("deletStudent");
+    myButton.addEventListener("click", function() {
+        alert("Студент исключен из группы");
+    });
+</script>
+</html>
